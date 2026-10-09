@@ -41,6 +41,12 @@ const envSchema = z
     NAUKRI_PASSWORD: optionalNonEmptyString,
     NAUKRI_AUTH_STATE: z.string().min(1).default("./.auth/naukri.json"),
 
+    // shine 
+    // ── Shine auth ──────────────────────────────────────
+    SHINE_USERNAME: optionalNonEmptyString,
+    SHINE_PASSWORD: optionalNonEmptyString,
+    SHINE_AUTH_STATE: z.string().min(1).default("./.auth/shine.json"),
+
     // Search
     JOB_SEARCH_KEYWORDS: z.string().min(1).default("MERN Stack Developer"),
     JOB_SEARCH_LOCATION: z.string().min(1).default("Noida OR Delhi"),

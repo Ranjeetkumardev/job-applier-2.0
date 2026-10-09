@@ -7,6 +7,8 @@ import { test as base } from "./db.js";
 export interface AuthFixtures {
   naukriAuthStatePath: string;
   hasNaukriAuth: boolean;
+   shineAuthStatePath: string;
+  hasShineAuth: boolean;
 }
 
 export const test = base.extend<AuthFixtures>({
@@ -26,6 +28,28 @@ export const test = base.extend<AuthFixtures>({
     const resolved = path.resolve(process.cwd(), env.NAUKRI_AUTH_STATE);
     await use(fs.existsSync(resolved));
   },
+
+  // ------------------------------------------------------------------
+  // Shine  
+    // ── Added for Shine ───────────────────────────────────
+  shineAuthStatePath: async ({}, use) => {
+    const resolved = path.resolve(process.cwd(), env.SHINE_AUTH_STATE);
+    if (!fs.existsSync(resolved)) {
+      throw new Error(
+        `Shine auth state missing at ${resolved}. ` +
+          `Run once with HEADLESS=false so global-setup can log in.`,
+      );
+    }
+    logger.debug({ path: resolved }, "Fixture: shine auth state ready");
+    await use(resolved);
+  },
+
+  hasShineAuth: async ({}, use) => {
+    const resolved = path.resolve(process.cwd(), env.SHINE_AUTH_STATE);
+    await use(fs.existsSync(resolved));
+  },
+  
+
 });
 
 export { expect } from "./db.js";

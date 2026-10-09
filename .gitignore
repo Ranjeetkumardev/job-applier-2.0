@@ -6,3 +6,6 @@ storage/
 reports/
 *.log
 .DS_Store
+storage/
+.auth/
+.env
